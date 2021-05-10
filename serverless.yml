@@ -1,0 +1,35 @@
+service: pcslssample
+
+provider:
+  name: aws
+  stage: dev
+  runtime: python3.8
+  region: ap-northeast-1
+  role: arn:aws:iam::${file(sls_configurations/config/common.yml):ACCOUNT_ID}:role/${opt:stage, self:provider.stage}-${self:service.name}-lambda-role
+  versionFunctions: false # This setting should be FALSE!
+  tracing:
+    apiGateway: false
+    lambda: false
+  environment:
+    env: ${self:provider.stage}
+    region: ${self:provider.region}
+    project: ${self:service.name}
+  tags:
+    PROJECT: ${self:service.name}
+
+package:
+  exclude:
+    - set_env.bat
+    - set_env.bat.example
+    - node_modules/**
+    - package-lock.json
+    - package.json
+    - .env.*
+    - README.md
+    - .gitignore
+
+plugins:
+  - serverless-prune-plugin
+
+functions:
+  - ${file(./sls_configurations/api/sls_api_1.yml)}

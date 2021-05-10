@@ -1,0 +1,10 @@
+getFunctionID1:
+  description: 'Provisioned Concurrency Serverless Framework Sample: Get Function ID'
+  handler: functions/api/function_ids/get_function_id.lambda_handler
+  events:
+    - http:
+        path: functionids/1
+        method: get
+  environment:
+    FANCTION_ID: 1
+  provisionedConcurrency: 1
