@@ -1,4 +1,4 @@
-# Lambda Providioned Concurrency Settings for Serverless Framework
+# Lambda Provisioned Concurrency Settings Sample for Serverless Framework
 
 ## Description
 
